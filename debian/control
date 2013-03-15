@@ -1,6 +1,6 @@
 Source: sigar
 Section: java
-Priority: extra
+Priority: optional
 Maintainer: Apollon Oikonomopoulos <apoikos@gmail.com>
 Build-Depends: debhelper (>= 9), perl, python2.7-dev, ant, liblog4j1.2-java,
                junit, ant-contrib-cpptasks, python-all-dev, openjdk-6-jdk
@@ -12,7 +12,7 @@ Homepage: http://support.hyperic.com/display/SIGAR/Home
 Package: libsigar1.6-java
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, liblog4j1.2-java, junit,
-         libsigar1.6 (= 1.6.4+dfsg1-1)
+         libsigar1.6 (>= ${source:Version})
 Description: System Information Gatherer And Reporter - Java bindings
  The Sigar API provides a portable interface for gathering system information
  such as:
