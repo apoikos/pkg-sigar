@@ -1,0 +1,4 @@
+version=3
+
+opts=dversionmangle=s/\+dfsg[0-9]$// \
+  https://github.com/hyperic/sigar/tags .*/sigar-([0-9.]+).tar.gz
