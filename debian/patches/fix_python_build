@@ -1,0 +1,13 @@
+Use the generic libsigar.so library
+
+--- a/bindings/python/setup.py
++++ b/bindings/python/setup.py
+@@ -22,7 +22,7 @@
+     ["_sigar.c"],
+     include_dirs = ['../java/sigar-bin/include'],
+     extra_compile_args = ['-Wall'],
+-    libraries=['sigar-universal-macosx'],
++    libraries=['sigar'],
+     library_dirs=['../java/sigar-bin/lib'],
+     extra_link_args=[],
+     define_macros=[],

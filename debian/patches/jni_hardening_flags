@@ -1,0 +1,20 @@
+Add the standard hardening flags to the JNI library's build environment.
+
+--- a/bindings/java/hyperic_jni/jni-build.xml
++++ b/bindings/java/hyperic_jni/jni-build.xml
+@@ -309,6 +309,7 @@
+           <define name="${jni.define.name}_LINUX"/>
+           <define name="_REENTRANT"/>
+           <define name="DMALLOC" if="jni.dmalloc"/>
++          <define name="_FORTIFY_SOURCE" value="2"/>
+         </defineset>
+       </compiler>
+ 
+@@ -321,6 +322,7 @@
+                 libs="dmallocth"/>
+         <linkerarg value="${jni.gccm}" if="jni.gccm"/>
+         <linkerarg value="-Wl,-soname,libsigar.so.1.6"/>
++        <linkerarg value="-Wl,-z,relro"/>
+       </linker>
+ 
+       <!-- Darwin -->

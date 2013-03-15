@@ -1,0 +1,99 @@
+Source: sigar
+Section: java
+Priority: extra
+Maintainer: Apollon Oikonomopoulos <apoikos@gmail.com>
+Build-Depends: debhelper (>= 9), perl, python2.7-dev, ant, liblog4j1.2-java,
+               junit, ant-contrib-cpptasks, python-all-dev, openjdk-6-jdk
+Standards-Version: 3.9.4
+Homepage: http://support.hyperic.com/display/SIGAR/Home
+#Vcs-Git: git://git.debian.org/collab-maint/sigar.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/sigar.git;a=summary
+
+Package: libsigar1.6-java
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblog4j1.2-java, junit,
+         libsigar1.6 (= 1.6.4-1)
+Description: System Information Gatherer And Reporter - Java bindings
+ The Sigar API provides a portable interface for gathering system information
+ such as:
+ .
+    System memory, swap, cpu, load average, uptime, logins
+    Per-process memory, cpu, credential info, state, arguments, environment,
+    open files File system detection and metrics
+    Network interface detection, configuration info and metrics
+    TCP and UDP connection tables
+    Network route table
+ .
+ This information is available in most operating systems, but each OS has their
+ own way(s) providing it. SIGAR provides developers with one API to access
+ this information regardless of the underlying platform.
+ .
+ This package provides the Java bindings for SIGAR.
+
+Package: python-sigar
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}
+Section: python
+Description: System Information Gatherer And Reporter - Python bindings
+ The Sigar API provides a portable interface for gathering system information
+ such as:
+ .
+    System memory, swap, cpu, load average, uptime, logins
+    Per-process memory, cpu, credential info, state, arguments, environment,
+    open files File system detection and metrics
+    Network interface detection, configuration info and metrics
+    TCP and UDP connection tables
+    Network route table
+ .
+ This information is available in most operating systems, but each OS has their
+ own way(s) providing it. SIGAR provides developers with one API to access
+ this information regardless of the underlying platform.
+ .
+ This package provides the Python bindings for SIGAR.
+
+Package: libsigar1.6
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: System Information Gatherer And Reporter - C library
+ The Sigar API provides a portable interface for gathering system information
+ such as:
+ .
+    System memory, swap, cpu, load average, uptime, logins
+    Per-process memory, cpu, credential info, state, arguments, environment,
+    open files
+    File system detection and metrics
+    Network interface detection, configuration info and metrics
+    TCP and UDP connection tables
+    Network route table
+ .
+ This information is available in most operating systems, but each OS has their
+ own way(s) providing it. SIGAR provides developers with one API to access
+ this information regardless of the underlying platform.
+ .
+ This package provides the core C library.
+
+Package: libsigar-dev
+Architecture: any
+Section: libdevel
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: System Information Gatherer And Reporter - development files
+ The Sigar API provides a portable interface for gathering system information
+ such as:
+ .
+    System memory, swap, cpu, load average, uptime, logins
+    Per-process memory, cpu, credential info, state, arguments, environment,
+    open files
+    File system detection and metrics
+    Network interface detection, configuration info and metrics
+    TCP and UDP connection tables
+    Network route table
+ .
+ This information is available in most operating systems, but each OS has their
+ own way(s) providing it. SIGAR provides developers with one API to access
+ this information regardless of the underlying platform.
+ .
+ This package provides the header files of the core C library.

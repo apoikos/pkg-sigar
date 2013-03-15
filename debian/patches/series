@@ -1,0 +1,3 @@
+debianize-build.xml.patch
+fix_python_build
+jni_hardening_flags

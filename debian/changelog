@@ -1,0 +1,5 @@
+sigar (1.6.4+dfsg1-1) unstable; urgency=low
+
+  * Initial release (Closes: #575873)
+
+ -- Apollon Oikonomopoulos <apoikos@gmail.com>  Thu, 14 Mar 2013 19:24:25 +0200

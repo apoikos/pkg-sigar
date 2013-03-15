@@ -1,0 +1,2 @@
+The original source shipped binaries (jars) for log4j, cpptasks and mx4j-jmx.
+These have been removed and the versions in Debian are used instead.

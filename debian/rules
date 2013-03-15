@@ -1,0 +1,53 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+#
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+#
+# Modified to make a template file for a multi-binary package with separated
+# build-arch and build-indep targets  by Bill Allombert 2001
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+JAVA_HOME=/usr/lib/jvm/default-java
+
+DEB_UPSTREAM_VERSION := $(shell dpkg-parsechangelog | awk '/^Version:/ { gsub(/-.*/, "", $$2); print $$2 }')
+LIB_VERSION := $(shell dpkg-parsechangelog | awk '/^Version:/ { gsub(/\.[0-9]+-.*/, "", $$2); print $$2 }')
+LIB_FILE := $(shell cat bindings/java/build/src/sigar.rc | awk '/^\#define SIGAR_ARCHLIB/ { print $$3 }' | tr -d '"')
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	dh_auto_build -Dbindings/java
+
+	ln -s `cat bindings/java/build/src/sigar.rc | awk '/^\#define SIGAR_ARCHLIB/ { print $$3 }' | tr -d '"'` $(CURDIR)/bindings/java/sigar-bin/lib/libsigar.so
+	(cd bindings/python && perl -Mlib=.. -MSigarWrapper -e generate Python .)
+
+	dh_auto_build -Dbindings/python
+
+override_dh_auto_install:
+	dh_auto_install -Dbindings/java
+	dh_auto_install -Dbindings/python
+
+	install -Dp -m 0644 bindings/java/sigar-bin/lib/sigar.jar $(CURDIR)/debian/libsigar1.6-java/usr/share/java/sigar-$(DEB_UPSTREAM_VERSION).jar
+	install -Dp -m 0644 bindings/java/sigar-bin/lib/$(LIB_FILE) $(CURDIR)/debian/libsigar1.6/usr/lib/$(DEB_HOST_MULTIARCH)/libsigar.so.$(DEB_UPSTREAM_VERSION)
+	ln -s sigar-$(DEB_UPSTREAM_VERSION).jar $(CURDIR)/debian/libsigar1.6-java/usr/share/java/sigar.jar
+	ln -s libsigar.so.$(DEB_UPSTREAM_VERSION) $(CURDIR)/debian/libsigar1.6/usr/lib/$(DEB_HOST_MULTIARCH)/libsigar.so.$(LIB_VERSION)
+	ln -s ../$(DEB_HOST_MULTIARCH)/libsigar.so.$(LIB_VERSION) $(CURDIR)/debian/libsigar1.6/usr/lib/jni/$(LIB_FILE)
+
+	install -d $(CURDIR)/debian/libsigar-dev/usr/lib/$(DEB_HOST_MULTIARCH)
+	ln -s libsigar.so.$(DEB_UPSTREAM_VERSION) $(CURDIR)/debian/libsigar-dev/usr/lib/$(DEB_HOST_MULTIARCH)/libsigar.so
+
+override_dh_auto_clean:
+	dh_auto_clean -Dbindings/java
+	dh_auto_clean -Dbindings/python
+	
+	rm -f bindings/python/_sigar_generated.c
