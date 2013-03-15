@@ -1,9 +1,12 @@
-Do not use the bundled jar files for cpptasks and log4j and update the
-classpath to lookup under /usr/share/java instead.
+Description: Use Debian-provided versions of bundled jars
+ Do not use the bundled jar files for cpptasks and log4j and update the
+ classpath to lookup under /usr/share/java instead.
+ .
+ Also remove compilers unsupported by debian's ant-contrib-cpptasks package
+ from the JNI's build definitions and specify a valid soname for the produced
+ library.
+Author: Apollon Oikonomopoulos <apoikos@gmail.com>
 
-Also remove compilers unsupported by debian's ant-contrib-cpptasks package from
-the JNI's build definitions and specify a valid soname for the produced
-library.
 --- a/bindings/java/build.xml
 +++ b/bindings/java/build.xml
 @@ -21,8 +21,6 @@

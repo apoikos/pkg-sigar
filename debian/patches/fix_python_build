@@ -1,4 +1,6 @@
-Use the generic libsigar.so library
+Description: Fix python binding build environment
+ Link against the generic libsigar.so library provided by libsigar1.6
+Author: Apollon Oikonomopoulos <apoikos@gmail.com>
 
 --- a/bindings/python/setup.py
 +++ b/bindings/python/setup.py

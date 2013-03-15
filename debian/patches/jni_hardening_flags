@@ -1,4 +1,5 @@
-Add the standard hardening flags to the JNI library's build environment.
+Description: Use standard hardening flags for the JNI build
+Author: Apollon Oikonomopoulos <apoikos@gmail.com>
 
 --- a/bindings/java/hyperic_jni/jni-build.xml
 +++ b/bindings/java/hyperic_jni/jni-build.xml
